@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.cydonian.rixfit"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:name="ca.cydonian.rixfit.GlobalState">
+        <activity
+            android:name="ca.cydonian.rixfit.MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ca.cydonian.rixfit.ExerciseListActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name="ca.cydonian.rixfit.ExerciseDetailActivity"
+            android:label="@string/title_exercise_detail"
+            android:parentActivityName=".ExerciseListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.cydonian.rixfit.ExerciseListActivity" />
+        </activity>
+        <activity
+            android:name="ca.cydonian.rixfit.AddExercise"
+            android:label="@string/title_activity_add_exercise"
+            android:parentActivityName="MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name="ca.cydonian.rixfit.AddWorkout"
+            android:label="@string/title_activity_add_workout"
+            android:parentActivityName="MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name="ca.cydonian.rixfit.WorkoutListActivity"
+            android:label="@string/title_workout_list"
+            android:parentActivityName="MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
+            android:name="ca.cydonian.rixfit.WorkoutDetailActivity"
+            android:label="@string/title_workout_detail"
+            android:parentActivityName=".WorkoutListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.cydonian.rixfit.WorkoutListActivity" />
+        </activity>
+    </application>
+
+</manifest>
