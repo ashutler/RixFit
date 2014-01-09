@@ -20,6 +20,7 @@ public class WorkoutsDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + ExercisesContract.ExerciseEntry.TABLE_NAME + " (" +
                     ExercisesContract.ExerciseEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     ExercisesContract.ExerciseEntry.COLUMN_NAME_EXERCISE_NAME + TEXT_TYPE + COMMA_SEP +
+                    ExercisesContract.ExerciseEntry.COLUMN_NAME_1RM + REAL_TYPE + COMMA_SEP +
                     ExercisesContract.ExerciseEntry.COLUMN_NAME_SUBTITLE + TEXT_TYPE  +
                     " )";
 

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ProjectModuleManager">
-    <modules />
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RixFit.iml" filepath="$PROJECT_DIR$/RixFit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RixFit/RixFit-RixFit.iml" filepath="$PROJECT_DIR$/RixFit/RixFit-RixFit.iml" />
+    </modules>
   </component>
 </project>
 

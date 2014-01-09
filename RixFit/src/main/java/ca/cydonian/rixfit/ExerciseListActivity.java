@@ -2,7 +2,9 @@ package ca.cydonian.rixfit;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 
 /**
@@ -21,7 +23,7 @@ import android.support.v4.app.FragmentActivity;
  * {@link ExerciseListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class ExerciseListActivity extends FragmentActivity
+public class ExerciseListActivity extends ActionBarActivity
         implements ExerciseListFragment.Callbacks {
 
     /**
@@ -78,4 +80,7 @@ public class ExerciseListActivity extends FragmentActivity
             startActivity(detailIntent);
         }
     }
+
+
+
 }

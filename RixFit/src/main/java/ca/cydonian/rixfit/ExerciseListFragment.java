@@ -2,6 +2,7 @@ package ca.cydonian.rixfit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -9,7 +10,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -33,6 +38,7 @@ import ca.cydonian.rixfit.dummy.DummyContent;
  */
 public class ExerciseListFragment extends ListFragment  {
 
+    public static final int ADD_EXERCISE_REQUEST = 0;
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
@@ -86,26 +92,54 @@ public class ExerciseListFragment extends ListFragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setHasOptionsMenu(true);
+
         GlobalState gs = (GlobalState) getActivity().getApplication();
         db = gs.getDatabase();
 
 
-        Cursor exercises = db.GetExercises();
-        String[] from = new String[]{
-                ExercisesContract.ExerciseEntry.COLUMN_NAME_EXERCISE_NAME,
-                ExercisesContract.ExerciseEntry.COLUMN_NAME_SUBTITLE
-        };
-        int[] to = new int[]{
-                R.id.exerciseName,
-                R.id.exerciseDescription
-        };
+        try
+        {
+            Cursor exercises = db.GetExercises();
+            String[] from = new String[]{
+                    ExercisesContract.ExerciseEntry.COLUMN_NAME_EXERCISE_NAME,
+                    ExercisesContract.ExerciseEntry.COLUMN_NAME_SUBTITLE
+            };
+            int[] to = new int[]{
+                    R.id.exerciseName,
+                    R.id.exerciseDescription
+            };
 
-        adapter = new SimpleCursorAdapter(getActivity(),
-                R.layout.exercise_row,
-                exercises,from,to,0);
-        setListAdapter(adapter);
+            adapter = new SimpleCursorAdapter(getActivity(),
+                    R.layout.exercise_row,
+                    exercises, from, to, 0);
+            setListAdapter(adapter);
+        }
+        catch (Exception e)
+        {
+            Log.v("ExerciseListFragment::onCreate", e.getMessage());
+        }
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.activity_exercise_list, menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_add_exercise) {
+            Intent addExercise = new Intent(getActivity(), AddExercise.class);
+            startActivityForResult(addExercise, ADD_EXERCISE_REQUEST);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -116,7 +150,13 @@ public class ExerciseListFragment extends ListFragment  {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
     }
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == ADD_EXERCISE_REQUEST)
+        {
+            adapter.notifyDataSetChanged();
+        }
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

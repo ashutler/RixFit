@@ -1,8 +1,6 @@
 package ca.cydonian.rixfit;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 
 public class AddExercise extends ActionBarActivity {
 
@@ -54,6 +52,10 @@ public class AddExercise extends ActionBarActivity {
      */
     public class PlaceholderFragment extends Fragment implements View.OnClickListener{
 
+        public static final int MAX_VALUE = 500;
+        public static final int MIN_VALUE = 1;
+        public static final int DEFAULT_VALUE = 100;
+
         public PlaceholderFragment() {
         }
 
@@ -66,6 +68,11 @@ public class AddExercise extends ActionBarActivity {
             {
                 addExercise.setOnClickListener(this);
             }
+            NumberPicker oneRepMax = (NumberPicker)rootView.findViewById(R.id.oneRepMax);
+            oneRepMax.setMaxValue(MAX_VALUE);
+            oneRepMax.setMinValue(MIN_VALUE);
+            oneRepMax.setValue(DEFAULT_VALUE);
+
             return rootView;
         }
 
@@ -74,11 +81,12 @@ public class AddExercise extends ActionBarActivity {
             EditText exerciseName, exerciseDescription;
             exerciseName = (EditText)getView().findViewById(R.id.exerciseNameText);
             exerciseDescription = (EditText)getView().findViewById(R.id.exerciseDescriptionText);
+            NumberPicker oneRepMax = (NumberPicker)getView().findViewById(R.id.oneRepMax);
 
             GlobalState gs = (GlobalState) getApplication();
             gs.getDatabase().InsertExercise(exerciseName.getText().toString(),
-                    exerciseDescription.getText().toString());
-
+                    exerciseDescription.getText().toString(),
+                    Float.valueOf(oneRepMax.getValue()));
 
 
             getActivity().finish();
