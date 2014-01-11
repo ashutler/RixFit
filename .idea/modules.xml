@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RixFit.iml" filepath="$PROJECT_DIR$/RixFit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RixFit.iml" filepath="$PROJECT_DIR$/RixFit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RixFit/RixFit-RixFit.iml" filepath="$PROJECT_DIR$/RixFit/RixFit-RixFit.iml" />
       <module fileurl="file://$PROJECT_DIR$/RixFit/RixFit-RixFit.iml" filepath="$PROJECT_DIR$/RixFit/RixFit-RixFit.iml" />
     </modules>
   </component>
